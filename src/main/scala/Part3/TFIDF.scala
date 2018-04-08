@@ -24,7 +24,7 @@ object FPGA {
     val trainQuery = sc.read.format("csv").option("header", "true").load(args(1))
 
     val newestEventPerUser = trainQuery.groupBy("order_id").agg(collect_list("product_id").as("product_id"))
-    val fpgrowth = new FPGrowth().setItemsCol("product_id").setMinSupport(0.005).setMinConfidence(0.2)
+    val fpgrowth = new FPGrowth().setItemsCol("product_id").setMinSupport(0.005).setMinConfidence(0.2).setNumPartitions(10)
     val model = fpgrowth.fit(newestEventPerUser)
 
     val inter = query.select("product_id","product_name").rdd.map { case Row(id: String, string: String) => (id, string) }
