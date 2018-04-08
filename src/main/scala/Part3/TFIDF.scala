@@ -8,7 +8,7 @@ import org.apache.spark.ml.fpm.FPGrowth
 import org.apache.spark.sql.functions.{udf, _}
 import org.apache.spark.sql.{Row, SparkSession}
 
-object TFIDF {
+object FPGA {
 
   def main(args: Array[String]) = {
     val conf = new SparkConf()
